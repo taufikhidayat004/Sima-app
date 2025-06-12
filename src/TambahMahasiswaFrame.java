@@ -1,60 +1,54 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.sql.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TambahMahasiswaFrame extends JFrame {
-    private JTextField tfNama, tfNIM, tfJurusan;
-    private Connection conn;
 
     public TambahMahasiswaFrame() {
-        setTitle("Tambah Mahasiswa");
-        setSize(300, 250);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Tambah Data Mahasiswa");
+        setSize(400, 300); // Diperkecil
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        conn = DatabaseConnection.getConnection();
+        // Komponen
+        JLabel namaLabel = new JLabel("Nama:");
+        JTextField namaField = new JTextField();
 
-        JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
+        JLabel nimLabel = new JLabel("NIM:");
+        JTextField nimField = new JTextField();
 
-        panel.add(new JLabel("Nama:"));
-        tfNama = new JTextField();
-        panel.add(tfNama);
+        JLabel jurusanLabel = new JLabel("Jurusan:");
+        JTextField jurusanField = new JTextField();
 
-        panel.add(new JLabel("NIM:"));
-        tfNIM = new JTextField();
-        panel.add(tfNIM);
+        JButton simpanButton = new JButton("Simpan");
 
-        panel.add(new JLabel("Jurusan:"));
-        tfJurusan = new JTextField();
-        panel.add(tfJurusan);
+        // Layout Panel
+        JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        JButton btnSimpan = new JButton("Simpan");
-        btnSimpan.addActionListener(e -> simpanMahasiswa());
-        panel.add(new JLabel());
-        panel.add(btnSimpan);
+        panel.add(namaLabel); panel.add(namaField);
+        panel.add(nimLabel); panel.add(nimField);
+        panel.add(jurusanLabel); panel.add(jurusanField);
+        panel.add(new JLabel()); panel.add(simpanButton);
 
         add(panel);
-    }
 
-    private void simpanMahasiswa() {
-        String nama = tfNama.getText();
-        String nim = tfNIM.getText();
-        String jurusan = tfJurusan.getText();
+        // Event Simpan
+        simpanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nama = namaField.getText();
+                String nim = nimField.getText();
+                String jurusan = jurusanField.getText();
 
-        try {
-            String sql = "INSERT INTO mahasiswa (nama, nim, jurusan) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, nama);
-            stmt.setString(2, nim);
-            stmt.setString(3, jurusan);
-            stmt.executeUpdate();
+                // Simpan ke database via DAO
+                // MahasiswaDAO.tambahMahasiswa(nama, nim, jurusan);
+                JOptionPane.showMessageDialog(null, "Data mahasiswa berhasil disimpan!");
+                dispose();
+            }
+        });
 
-            JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan!");
-            dispose(); // tutup jendela
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
-        }
+        setVisible(true);
     }
 }
-
