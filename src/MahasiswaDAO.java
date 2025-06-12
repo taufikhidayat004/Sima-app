@@ -16,10 +16,11 @@ public class MahasiswaDAO {
     }
 
     public ArrayList<Mahasiswa> getAllMahasiswa() throws SQLException {
+        ArrayList<Mahasiswa> list = new ArrayList<>();
         Connection conn = DatabaseConnection.getConnection();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM mahasiswa");
-        ArrayList<Mahasiswa> list = new ArrayList<>();
+
         while (rs.next()) {
             Mahasiswa m = new Mahasiswa(
                     rs.getInt("id"),
@@ -29,10 +30,12 @@ public class MahasiswaDAO {
             );
             list.add(m);
         }
+
         rs.close();
         conn.close();
         return list;
     }
+
 
     public void updateMahasiswa(int id, String nama, String nim, String jurusan) throws SQLException {
         Connection conn = DatabaseConnection.getConnection();
