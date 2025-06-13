@@ -26,7 +26,7 @@ Aplikasi desktop berbasis Java untuk mengelola data mahasiswa, dilengkapi fitur 
 |--------------|------------|-----------------|
 | ![login](screenshots/login.png) | ![menu](screenshots/menu.png) | ![input](screenshots/input.png) |
 
-*(Bisa ditambahkan sendiri jika lu punya gambar GUI-nya, tinggal simpan di folder `screenshots/`)*
+*(Bisa ditambahkan sendiri jika kamu punya gambar GUI-nya, tinggal simpan di folder `screenshots/`)*
 
 ---
 
