@@ -12,8 +12,7 @@ Aplikasi desktop berbasis Java untuk mengelola data mahasiswa, dilengkapi fitur 
 - ✏️ Edit Data Mahasiswa
 - 🗑️ Hapus Mahasiswa
 - 🔍 Cari Mahasiswa
-- 📤 Export Data ke CSV
-- 📤 Export Data ke Excel (.xlsx)
+- 📤 Export Data Ke Excel 
 - 👤 Ubah Username & Password Admin
 - 👁️ Lihat Password Saat Login
 - 🖼️ GUI (Graphical User Interface) via Java Swing
